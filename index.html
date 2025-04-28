@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Puffy.pl - Pufy i fotele | Pufs y sillones</title>
+  <!-- Google Fonts for logo and body text -->
+  <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #fff;
+      border-bottom: 1px solid #eee;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .header-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+    }
+    .logo a {
+      font-family: 'Pacifico', cursive;
+      font-size: 1.5em;
+      color: #ff6600;
+      text-decoration: none;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .header-right a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      font-size: 0.95em;
+    }
+    .header-right a:hover {
+      color: #ff6600;
+    }
+    .menu-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+    }
+    .menu-list a {
+      text-decoration: none;
+      color: #333;
+    }
+    .menu-list a:hover {
+      color: #ff6600;
+    }
+    .lang-switch a {
+      text-decoration: none;
+      font-size: 1.1em;
+      margin: 0 4px;
+    }
+    .lang-switch a.active {
+      font-weight: bold;
+      opacity: 1;
+    }
+    .lang-switch a:not(.active) {
+      opacity: 0.6;
+    }
+    /* Language toggle: show/hide content */
+    .lang-es { display: none; }
+    .lang-pl { display: block; }
+    body.lang-es .lang-es { display: block; }
+    body.lang-es .lang-pl { display: none; }
+    /* Hero Section */
+    .hero {
+      position: relative;
+      text-align: center;
+      color: #fff;
+    }
+    .hero img {
+      width: 100%;
+      display: block;
+      opacity: 0.8;
+    }
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      max-width: 600px;
+    }
+    .hero-text h1 {
+      font-size: 2em;
+      margin: 0 0 0.2em;
+      text-shadow: 0 0 5px rgba(0,0,0,0.3);
+    }
+    .hero-text p {
+      font-size: 1.2em;
+      margin: 0;
+      text-shadow: 0 0 5px rgba(0,0,0,0.3);
+    }
+    /* Sections */
+    section {
+      padding: 80px 20px 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    section h2 {
+      font-size: 1.8em;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #ff6600;
+    }
+    /* Catalog (Products) */
+    .product-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .product-item {
+      background: #fff;
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #eee;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .product-item img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto 10px;
+      border-radius: 5px;
+    }
+    .product-item h3 {
+      font-size: 1.1em;
+      margin: 0 0 0.5em;
+      color: #333;
+    }
+    .product-item p {
+      font-size: 0.95em;
+      margin: 0;
+      color: #555;
+    }
+    /* Reviews (Testimonials) */
+    .reviews-list {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .testimonial {
+      background: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+    .testimonial strong {
+      display: block;
+      margin-top: 5px;
+      text-align: right;
+      font-style: normal;
+      color: #333;
+    }
+    /* Contact Section */
+    .contact-container {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .contact-form {
+      flex: 1 1 300px;
+    }
+    .contact-form p {
+      margin-bottom: 20px;
+      font-size: 1em;
+      color: #333;
+      line-height: 1.4;
+    }
+    .contact-form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 0.95em;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .contact-form textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    .contact-form button {
+      background: #ff6600;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .contact-form button:hover {
+      background: #e05500;
+    }
+    .contact-image {
+      flex: 1 1 300px;
+      text-align: center;
+    }
+    .contact-image img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+    .contact-info {
+      margin-top: 10px;
+      font-size: 0.95em;
+    }
+    .contact-info p {
+      margin: 5px 0;
+    }
+    .contact-info strong {
+      color: #333;
+    }
+    .contact-info a {
+      color: #ff6600;
+      text-decoration: none;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      padding: 20px 0;
+    }
+    footer .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: center;
+      font-size: 0.9em;
+    }
+    footer p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body class="lang-pl">
+  <header>
+    <div class="header-flex">
+      <div class="logo"><a href="#home">Puffy<span>.pl</span></a></div>
+      <div class="header-right">
+        <nav class="main-nav">
+          <ul class="menu-list">
+            <li><a href="#home"><span class="lang-es">Inicio</span><span class="lang-pl">Strona Główna</span></a></li>
+            <li><a href="#catalog"><span class="lang-es">Catálogo de Pufs</span><span class="lang-pl">Katalog Puf</span></a></li>
+            <li><a href="#about"><span class="lang-es">Sobre Nosotros</span><span class="lang-pl">O Nas</span></a></li>
+            <li><a href="#reviews"><span class="lang-es">Opiniones</span><span class="lang-pl">Opinie</span></a></li>
+            <li><a href="#contact"><span class="lang-es">Contacto</span><span class="lang-pl">Kontakt</span></a></li>
+          </ul>
+        </nav>
+        <a href="https://instagram.com/YourProfile" target="_blank">Instagram</a>
+        <span class="lang-switch">
+          <a id="flag-pl" href="javascript:void(0);" onclick="setLanguage('pl')" class="active">🇵🇱</a> |
+          <a id="flag-es" href="javascript:void(0);" onclick="setLanguage('es')">🇪🇸</a>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <section id="home" class="hero">
+    <img src="https://via.placeholder.com/1200x400?text=Puffy+Beanbags" alt="Puffy Bean Bag Chairs" />
+    <div class="hero-text">
+      <h1>
+        <span class="lang-es">¡Bienvenido a Puffy!</span>
+        <span class="lang-pl">Witamy w Puffy!</span>
+      </h1>
+      <p>
+        <span class="lang-es">Los mejores pufs y sillones tipo saco en Polonia.</span>
+        <span class="lang-pl">Najlepsze pufy i fotele workowe w Polsce.</span>
+      </p>
+    </div>
+  </section>
+
+  <section id="catalog">
+    <h2>
+      <span class="lang-es">Catálogo de Pufs</span>
+      <span class="lang-pl">Katalog Puf</span>
+    </h2>
+    <p class="lang-es" style="text-align:center; margin-bottom:30px;">
+      Encuentra el puf perfecto para tu hogar. Ofrecemos una variedad de modelos para todas las necesidades.
+    </p>
+    <p class="lang-pl" style="text-align:center; margin-bottom:30px;">
+      Znajdź idealny puf do swojego domu. Oferujemy szeroki wybór modeli na każdą potrzebę.
+    </p>
+    <div class="product-list">
+      <div class="product-item">
+        <img src="https://via.placeholder.com/300?text=Puf+1" alt="Puf Clásico / Puf Klasyczny" />
+        <h3>
+          <span class="lang-es">Puf Clásico</span>
+          <span class="lang-pl">Puf Klasyczny</span>
+        </h3>
+        <p>
+          <span class="lang-es">Un puf versátil y cómodo, ideal para cualquier habitación.</span>
+          <span class="lang-pl">Uniwersalny i wygodny puf, idealny do każdego pokoju.</span>
+        </p>
+      </div>
+      <div class="product-item">
+        <img src="https://via.placeholder.com/300?text=Puf+2" alt="Puf XL (Extra Grande)" />
+        <h3>
+          <span class="lang-es">Puf XL</span>
+          <span class="lang-pl">Pufa XL</span>
+        </h3>
+        <p>
+          <span class="lang-es">Tamaño extra grande para máxima comodidad.</span>
+          <span class="lang-pl">Bardzo duży rozmiar zapewniający maksymalny komfort.</span>
+        </p>
+      </div>
+      <div class="product-item">
+        <img src="https://via.placeholder.com/300?text=Puf+3" alt="Sillón Saco Deluxe / Fotel Worek Deluxe" />
+        <h3>
+          <span class="lang-es">Sillón Saco Deluxe</span>
+          <span class="lang-pl">Fotel Worek Deluxe</span>
+        </h3>
+        <p>
+          <span class="lang-es">Diseño premium con materiales de alta calidad.</span>
+          <span class="lang-pl">Ekskluzywny design z wysokiej jakości materiałów.</span>
+        </p>
+      </div>
+      <div class="product-item">
+        <img src="https://via.placeholder.com/300?text=Puf+4" alt="Puf Infantil / Pufa dla dzieci" />
+        <h3>
+          <span class="lang-es">Puf Infantil</span>
+          <span class="lang-pl">Pufa dla dzieci</span>
+        </h3>
+        <p>
+          <span class="lang-es">Un puf ligero y seguro, perfecto para los más pequeños.</span>
+          <span class="lang-pl">Lekki i bezpieczny puf, idealny dla najmłodszych.</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>
+      <span class="lang-es">Sobre Nosotros</span>
+      <span class="lang-pl">O Nas</span>
+    </h2>
+    <p>
+      <span class="lang-es">Somos Puffy, una empresa polaca especializada en la venta de pufs y sillones tipo saco. Ofrecemos productos de alta calidad que combinan comodidad con diseño moderno. Nuestro objetivo es brindar alegría y color a cada espacio con pufs cómodos y divertidos.</span>
+      <span class="lang-pl">Jesteśmy Puffy, polską firmą specjalizującą się w sprzedaży puf i foteli workowych. Oferujemy produkty najwyższej jakości, łączące wygodę z nowoczesnym designem. Naszym celem jest wniesienie radości i koloru do każdego wnętrza dzięki wygodnym i oryginalnym pufom.</span>
+    </p>
+  </section>
+
+  <section id="reviews">
+    <h2>
+      <span class="lang-es">Opiniones</span>
+      <span class="lang-pl">Opinie</span>
+    </h2>
+    <div class="reviews-list lang-es">
+      <p class="testimonial">"El mejor puf que he comprado, perfecto para relajarme. ¡Gracias, Puffy!"<br><strong>- Juan</strong></p>
+      <p class="testimonial">"¡Excelente calidad! Los pufs son muy cómodos y el servicio es impecable."<br><strong>- María</strong></p>
+    </div>
+    <div class="reviews-list lang-pl">
+      <p class="testimonial">"Najlepsza pufa, jaką kupiłem – idealna do relaksu. Dziękuję, Puffy!"<br><strong>- Jan</strong></p>
+      <p class="testimonial">"Pufy doskonale wykonane i bardzo wygodne. Obsługa klienta na najwyższym poziomie."<br><strong>- Kasia</strong></p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>
+      <span class="lang-es">Contacto</span>
+      <span class="lang-pl">Kontakt</span>
+    </h2>
+    <div class="contact-container">
+      <div class="contact-form">
+        <p>
+          <span class="lang-es">¿Tienes preguntas o quieres hacer un pedido? Rellena el formulario o contáctanos por <a href="https://wa.me/48799085799" target="_blank">WhatsApp</a>.</span>
+          <span class="lang-pl">Masz pytania lub chcesz złożyć zamówienie? Wypełnij formularz lub skontaktuj się z nami przez <a href="https://wa.me/48799085799" target="_blank">WhatsApp</a>.</span>
+        </p>
+        <form action="#" method="post">
+          <label for="name"><span class="lang-es">Nombre</span><span class="lang-pl">Imię</span>:</label>
+          <input type="text" id="name" name="name" required />
+          <label for="phone"><span class="lang-es">Teléfono</span><span class="lang-pl">Telefon</span>:</label>
+          <input type="tel" id="phone" name="phone" required />
+          <label for="message"><span class="lang-es">Mensaje</span><span class="lang-pl">Wiadomość</span>:</label>
+          <textarea id="message" name="message" required></textarea>
+          <button type="submit"><span class="lang-es">Enviar</span><span class="lang-pl">Wyślij</span></button>
+        </form>
+        <div class="contact-info">
+          <p><strong>WhatsApp:</strong> <a href="https://wa.me/48799085799" target="_blank">+48 799 085 799</a></p>
+          <p><strong>Instagram:</strong> <a href="https://instagram.com/YourProfile" target="_blank">@puffy.pl</a></p>
+        </div>
+      </div>
+      <div class="contact-image">
+        <img src="https://via.placeholder.com/400x300?text=Contact+Us" alt="Kontakt" />
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>
+        <span class="lang-es">© 2025 Puffy. Todos los derechos reservados.</span>
+        <span class="lang-pl">© 2025 Puffy. Wszelkie prawa zastrzeżone.</span>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    function setLanguage(lang) {
+      document.body.className = 'lang-' + lang;
+      // Highlight the active language flag
+      document.getElementById('flag-pl').classList.toggle('active', lang === 'pl');
+      document.getElementById('flag-es').classList.toggle('active', lang === 'es');
+    }
+  </script>
+</body>
+</html>
